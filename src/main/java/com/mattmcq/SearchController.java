@@ -21,6 +21,11 @@ public class SearchController {
     }
 
 
+    @RequestMapping("/")
+    String index() {
+        return "search";
+    }
+
     @RequestMapping("/search")
     public String search(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);

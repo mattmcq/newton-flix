@@ -13,6 +13,7 @@ public class NewtonflixApplication {
 
 
 	public static void main(String[] args) {
+		log.info("starting app ...");
 		SpringApplication.run(NewtonflixApplication.class, args);
 	}
 
