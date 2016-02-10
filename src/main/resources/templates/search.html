@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'"/>
+
+<h2>Product List</h2>
+<table class="table table-striped">
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.title}">Title</td>
+        <td th:text="${movie.year}">Year</td>
+        <td th:text="${movie.imdbID}">Imdb Link</td>
+
+    </tr>
+</table>
+
+</body>
+</html>

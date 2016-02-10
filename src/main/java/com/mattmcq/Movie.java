@@ -8,24 +8,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
-    private String Title;
-    private String Year;
+    private String title;
+    private String year;
     private String imdbID;
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getYear() {
-        return Year;
+        return year;
     }
 
     public void setYear(String year) {
-        Year = year;
+        this.year = year;
     }
 
     public String getImdbID() {
