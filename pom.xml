@@ -6,7 +6,7 @@
 	<groupId>com.mattmcq</groupId>
 	<artifactId>newtonflix</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>newtonflix</name>
 	<description>Demo project for Newton Flix using Spring Boot</description>
