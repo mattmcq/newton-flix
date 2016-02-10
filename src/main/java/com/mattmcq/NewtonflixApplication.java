@@ -30,25 +30,19 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.mattmcq"})
-@PropertySource({"classpath:application.properties" })
 public class NewtonflixApplication implements CommandLineRunner {
 
 
 	private static final Logger log = LoggerFactory.getLogger(NewtonflixApplication.class);
-//	private static final String urlForQuery = "http://www.omdbapi.com/?s=newton";
-
-	@Autowired
-	private Environment env;
-
-	@Bean(name = "omdbApiUrl")
-	public String omdbApiUrl() {
-		return env.getProperty("api.omdbapi.url");
-	}
-
+	private static final String urlForQuery = "http://www.omdbapi.com/?s=newton";
 
 	private Movie movie;
+
+	private static RestTemplate restTemplate;
+
+	static {
+		restTemplate = new RestTemplate();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(NewtonflixApplication.class, args);
@@ -71,22 +65,29 @@ public class NewtonflixApplication implements CommandLineRunner {
 
 //rt.notify();
 //        List<Movie> movies = restTemplate.getForObject(urlForQuery,MovieListInfo.class).getMovies();
-		List<Object> resultsList = restTemplate.getForObject(urlForQuery,MovieListInfo.class).getMovies();
 
 		List<Movie> fullList = new ArrayList<Movie>();
+		List<Object> resultsList = new ArrayList<>();
+//		getNumberOfPages();
+
+//		List<Object> resultsList = restTemplate.getForObject(urlForQuery,MovieListInfo.class).getMovies();
 
 
-		for (int i = 0; i < resultsList.size(); i++) {
+		for (int p = 1; p <= getNumberOfPages(); p++) {
+
+			resultsList = getMoviesFromSpecificPage(p);
+
+			for (int i = 0; i < resultsList.size(); i++) {
 
 //			Movie movie = (Movie) movies.get(i);
-			System.out.println("movie.getTitle() = " + ((java.util.LinkedHashMap)resultsList.get(i)).get("Title"));
-			movie = new Movie();
-			movie.setTitle(((java.util.LinkedHashMap)resultsList.get(i)).get("Title").toString());
-			movie.setYear(((java.util.LinkedHashMap)resultsList.get(i)).get("Year").toString());
-			movie.setImdbID(((java.util.LinkedHashMap)resultsList.get(i)).get("imdbID").toString());
-			fullList.add(movie);
+				System.out.println("movie.getTitle() = " + ((java.util.LinkedHashMap) resultsList.get(i)).get("Title"));
+				movie = new Movie();
+				movie.setTitle(((java.util.LinkedHashMap) resultsList.get(i)).get("Title").toString());
+				movie.setYear(((java.util.LinkedHashMap) resultsList.get(i)).get("Year").toString());
+				movie.setImdbID(((java.util.LinkedHashMap) resultsList.get(i)).get("imdbID").toString());
+				fullList.add(movie);
+			}
 		}
-
 
 		log.info(fullList.toString());
 
@@ -98,7 +99,7 @@ public class NewtonflixApplication implements CommandLineRunner {
 	}
 
 	private int getNumberOfPages(){
-
+		return restTemplate.getForObject(urlForQuery,MovieListInfo.class).getTotalResults() / 10;
 	}
 
 
