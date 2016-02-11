@@ -20,19 +20,19 @@
     <div th:if="${not #lists.isEmpty(movies)}">
         <h2>Movie's with 'Newton' in the title:</h2>
         <table class="table table-bordered table-hover">
-    <tr>
-        <th>Title</th>
-        <th>Year</th>
-        <th>Imdb Link</th>
-    </tr>
-    <tr th:each="movie : ${movies}">
-        <td th:text="${movie.title}">Title</td>
-        <td th:text="${movie.year}">Year</td>
-        <td><a th:href="${'http://www.imdb.com/title/' + movie.imdbID}">View IMDB</a></td>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Imdb Link</th>
+            </tr>
+            <tr th:each="movie : ${movies}">
+                <td th:text="${movie.title}">Title</td>
+                <td th:text="${movie.year}">Year</td>
+                <td><a th:href="${'http://www.imdb.com/title/' + movie.imdbID}">View IMDB</a></td>
 
 
-    </tr>
-</table>
+            </tr>
+        </table>
     </div>
 </div>
 

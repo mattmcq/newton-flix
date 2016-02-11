@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SearchController {
 
+    @Autowired
     private MovieService movieService;
 
     @Autowired
@@ -27,8 +27,7 @@ public class SearchController {
     }
 
     @RequestMapping("/app/search")
-    public String search(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
+    public String search(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "search";
     }

@@ -9,17 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NewtonflixApplication {
 
 
-	private static final Logger log = LoggerFactory.getLogger(NewtonflixApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(NewtonflixApplication.class);
 
 
-	public static void main(String[] args) {
-		log.info("starting app ...");
-		SpringApplication.run(NewtonflixApplication.class, args);
-	}
-
-
-
-
+    public static void main(String[] args) {
+        log.info("starting app ...");
+        SpringApplication.run(NewtonflixApplication.class, args);
+    }
 
 
 }

@@ -25,6 +25,10 @@ public class MovieServiceImpl implements MovieService {
         restTemplate = new RestTemplate();
     }
 
+    @JsonProperty("Search")
+    private List<Object> moviesList;
+    @JsonProperty("totalResults")
+    private int totalResults;
 
     public List<Movie> getAllMovies() {
 
@@ -57,13 +61,6 @@ public class MovieServiceImpl implements MovieService {
     public int getNumberOfPages() {
         return 1 + (restTemplate.getForObject(urlForQuery, MovieServiceImpl.class).getTotalResults() / 10);
     }
-
-    @JsonProperty("Search")
-    private List<Object> moviesList;
-
-    @JsonProperty("totalResults")
-    private int totalResults;
-
 
     @Override
     public List<Object> getMoviesList() {

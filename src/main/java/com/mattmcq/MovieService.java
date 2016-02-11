@@ -8,9 +8,9 @@ import java.util.List;
 public interface MovieService {
     List<Object> getMoviesList();
 
-    List<Movie> getAllMovies();
-
     void setMoviesList(List<Object> movies);
+
+    List<Movie> getAllMovies();
 
     int getTotalResults();
 
