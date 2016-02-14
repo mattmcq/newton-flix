@@ -25,41 +25,59 @@ public class MovieServiceImpl implements MovieService {
         restTemplate = new RestTemplate();
     }
 
+    List<Movie> fullList = new ArrayList<>();
+    int numberOfPages;
     @JsonProperty("Search")
     private List<Object> moviesList;
     @JsonProperty("totalResults")
     private int totalResults;
 
     public List<Movie> getAllMovies() {
+        // get first page of movies and set numberOfPages
+        fullList = getMoviesFromPage(1);
 
-        Movie movie;
-        List<Movie> fullList = new ArrayList<>();
-        List<Object> resultsList = new ArrayList<>();
-
-        for (int p = 1; p <= getNumberOfPages(); p++) {
-
-            resultsList = getMoviesFromSpecificPage(p);
-
-            for (int i = 0; i < resultsList.size(); i++) {
-
-                System.out.println("movie.getTitle() = " + ((java.util.LinkedHashMap) resultsList.get(i)).get("Title"));
-                movie = new Movie();
-                movie.setTitle(((LinkedHashMap) resultsList.get(i)).get("Title").toString());
-                movie.setYear(((LinkedHashMap) resultsList.get(i)).get("Year").toString());
-                movie.setImdbID(((LinkedHashMap) resultsList.get(i)).get("imdbID").toString());
-                fullList.add(movie);
+        if (numberOfPages > 1) {
+            for (int p = 2; p < 1 + numberOfPages; p++) {
+                fullList.addAll(getMoviesFromPage(p));
             }
         }
         return fullList;
+
     }
 
-    public List<Object> getMoviesFromSpecificPage(int pageNum) {
-        List<Object> resultsList = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), MovieServiceImpl.class).getMoviesList();
-        return resultsList;
+    public List<Movie> getMoviesFromPage(int pageNum) {
+
+        Movie movie;
+        List<Object> resultsList = new ArrayList<>();
+        List<Movie> singlePageOfMovies = new ArrayList<>();
+
+
+        resultsList = getSinglePageResults(pageNum);
+
+        for (int i = 0; i < resultsList.size(); i++) {
+
+            System.out.println("movie.getTitle() = " + ((java.util.LinkedHashMap) resultsList.get(i)).get("Title"));
+            movie = new Movie();
+            movie.setTitle(((LinkedHashMap) resultsList.get(i)).get("Title").toString());
+            movie.setYear(((LinkedHashMap) resultsList.get(i)).get("Year").toString());
+            movie.setImdbID(((LinkedHashMap) resultsList.get(i)).get("imdbID").toString());
+            singlePageOfMovies.add(movie);
+        }
+
+        return singlePageOfMovies;
     }
 
-    public int getNumberOfPages() {
-        return 1 + (restTemplate.getForObject(urlForQuery, MovieServiceImpl.class).getTotalResults() / 10);
+    public List<Object> getSinglePageResults(int pageNum) {
+        MovieService req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), MovieServiceImpl.class);
+        if (pageNum == 1)
+            setNumberOfPages(1 + (req.getTotalResults() / 10)); // always set the number of pages on first page request
+        return req.getMoviesList();
+    }
+
+
+    private void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
+        System.out.println("numberOfPages = " + numberOfPages);
     }
 
     @Override
