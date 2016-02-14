@@ -56,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
 
         for (int i = 0; i < resultsList.size(); i++) {
 
-            System.out.println("movie.getTitle() = " + ((java.util.LinkedHashMap) resultsList.get(i)).get("Title"));
+            log.info("movie.getTitle() = " + ((java.util.LinkedHashMap) resultsList.get(i)).get("Title"));
             movie = new Movie();
             movie.setTitle(((LinkedHashMap) resultsList.get(i)).get("Title").toString());
             movie.setYear(((LinkedHashMap) resultsList.get(i)).get("Year").toString());
@@ -77,7 +77,7 @@ public class MovieServiceImpl implements MovieService {
 
     private void setNumberOfPages(int numberOfPages) {
         this.numberOfPages = numberOfPages;
-        System.out.println("numberOfPages = " + numberOfPages);
+        log.info("numberOfPages = " + numberOfPages);
     }
 
     @Override
