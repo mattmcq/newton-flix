@@ -16,7 +16,7 @@ public class MovieServiceImpl implements MovieService {
 
     private static final Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
-    private static final String urlForQuery = "http://www.omdbapi.com/?s=newton";
+    private static String urlForQuery = "http://www.omdbapi.com/?s=newton";
 
     private static RestTemplate restTemplate;
 
