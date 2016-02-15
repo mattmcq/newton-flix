@@ -26,7 +26,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     List<Movie> fullList = new ArrayList<>();
-    int numberOfPages;
+    int numberOfPages = 0;
     @JsonProperty("Search")
     private List<Object> moviesList;
     @JsonProperty("totalResults")
@@ -48,7 +48,7 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getMoviesFromPage(int pageNum) {
 
         Movie movie;
-        List<Object> resultsList = new ArrayList<>();
+        List<Object> resultsList;
         List<Movie> singlePageOfMovies = new ArrayList<>();
 
 
@@ -68,9 +68,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public List<Object> getSinglePageResults(int pageNum) {
-        MovieService req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), MovieServiceImpl.class);
-        if (pageNum == 1)
+//        MovieService req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), MovieServiceImpl.class);
+        SearchResults req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), SearchResults.class);
+        if (pageNum == 1) {
             setNumberOfPages(1 + (req.getTotalResults() / 10)); // always set the number of pages on first page request
+        }
         return req.getMoviesList();
     }
 
