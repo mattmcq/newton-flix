@@ -17,12 +17,6 @@ public class Movie {
     private String imdbID;
 
 
-    public Movie(String title, String year, String imdbID) {
-        this.title = title;
-        this.year = year;
-        this.imdbID = imdbID;
-    }
-
     public String getTitle() {
         return title;
     }
