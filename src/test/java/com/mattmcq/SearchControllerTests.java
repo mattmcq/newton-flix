@@ -11,15 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -29,7 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
  */
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = NewtonflixApplication.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class SearchControllerTests {
 
 
@@ -54,20 +49,20 @@ public class SearchControllerTests {
 
     @Test
     public void testIndex() throws Exception {
-        this.mockMvc.perform(get("/app/").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+        this.mockMvc.perform(get("/newtonflix/").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk());
     }
 
 
-    @Test
-    public void testSearch_MoviesFound_ShouldReturnFoundMovieEntries() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/app/search/").accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andDo(print())
-                .andReturn();
-        assertThat(mvcResult.getResponse().getContentAsString(), containsString("Groovemonster"));
-    }
+//    @Test
+//    public void testSearch_MoviesFound_ShouldReturnFoundMovieEntries() throws Exception {
+//        MvcResult mvcResult = this.mockMvc.perform(get("/newtonflix/search/").accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType("text/html;charset=UTF-8"))
+//                .andDo(print())
+//                .andReturn();
+//        assertThat(mvcResult.getResponse().getContentAsString(), containsString("Groovemonster"));
+//    }
 
 
 }

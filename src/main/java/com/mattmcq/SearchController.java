@@ -21,12 +21,12 @@ public class SearchController {
     }
 
 
-    @RequestMapping("/app/")
+    @RequestMapping("/newtonflix/")
     String index() {
         return "search";
     }
 
-    @RequestMapping("/app/search")
+    @RequestMapping("/newtonflix/search")
     public String search(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "search";

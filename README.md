@@ -6,7 +6,7 @@ mvn install
 ```
 
 1. This creates a war in the 'target' directory. Throw this war into tomcat.
-2. Load the base url in a browser:  http://localhost:8080/app/
+2. Load the base url in a browser:  http://localhost:8080/newtonflix/
 3. Click the button to search
 
 #### Gotchas:

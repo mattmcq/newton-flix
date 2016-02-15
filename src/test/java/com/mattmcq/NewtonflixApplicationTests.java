@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = NewtonflixApplication.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class NewtonflixApplicationTests {
 
     RestTemplate template = new TestRestTemplate();
