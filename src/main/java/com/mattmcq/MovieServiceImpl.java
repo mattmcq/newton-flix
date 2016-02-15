@@ -18,7 +18,9 @@ public class MovieServiceImpl implements MovieService {
 
     private static final Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
-    private static final String urlForQuery = "http://www.omdbapi.com/?s=newton";
+    //    private static final String urlForQuery = "http://www.omdbapi.com/?s=newton";
+    private static final String urlForQuery = "http://www.omdbapi.com/?s=newton+boys";
+
     private static RestTemplate restTemplate;
 
     static {
@@ -69,7 +71,9 @@ public class MovieServiceImpl implements MovieService {
 
     public List<Object> getSinglePageResults(int pageNum) {
 //        MovieService req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), MovieServiceImpl.class);
+
         SearchResults req = restTemplate.getForObject(urlForQuery.concat("&page=").concat(String.valueOf(pageNum)), SearchResults.class);
+
         if (pageNum == 1) {
             setNumberOfPages(1 + (req.getTotalResults() / 10)); // always set the number of pages on first page request
         }

@@ -1,6 +1,7 @@
 package com.mattmcq;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
@@ -9,8 +10,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
+    @JsonProperty("Title")
     private String title;
+    @JsonProperty("Year")
     private String year;
+
     private String imdbID;
 
     public static Builder getBuilder(String title) {
@@ -29,8 +33,8 @@ public class Movie {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setYear(String Year) {
+        this.year = Year;
     }
 
     public String getImdbID() {
@@ -41,6 +45,7 @@ public class Movie {
         this.imdbID = imdbID;
     }
 
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
@@ -50,17 +55,17 @@ public class Movie {
 
         private Movie built;
 
-        public Builder(String title) {
+        public Builder(String theTitle) {
             built = new Movie();
-            built.title = title;
+            built.title = theTitle;
         }
 
         public Movie build() {
             return built;
         }
 
-        public Builder year(String year) {
-            built.year = year;
+        public Builder year(String theYear) {
+            built.year = theYear;
             return this;
         }
     }
