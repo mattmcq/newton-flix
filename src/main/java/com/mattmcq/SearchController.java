@@ -25,7 +25,7 @@ public class SearchController {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World!";
+        return "search";
     }
 
     @RequestMapping("/newtonflix/")
@@ -33,11 +33,18 @@ public class SearchController {
         return "search";
     }
 
-    @RequestMapping("/newtonflix/search")
+    @RequestMapping("/search")
     public String search(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "search";
     }
+
+// ******** this only works for maven ******
+//    @RequestMapping("/newtonflix/search")
+//    public String search(Model model) {
+//        model.addAttribute("movies", movieService.getAllMovies());
+//        return "search";
+//    }
 
 }
 
