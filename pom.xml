@@ -20,7 +20,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <skipTests>true</skipTests>
+        <skipTests>false</skipTests>
         <java.version>1.8</java.version>
         <start-class>com.mattmcq.Application</start-class>
     </properties>

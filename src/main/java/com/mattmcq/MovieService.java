@@ -10,5 +10,7 @@ public interface MovieService {
 
     List<Movie> getAllMovies();
 
+    List<Movie> getMoviesFromPage(int pageNum);
 
+    int getNumberOfPages();
 }
